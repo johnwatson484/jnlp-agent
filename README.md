@@ -1,0 +1,2 @@
+# jnlp-slave
+Jenkins slave
