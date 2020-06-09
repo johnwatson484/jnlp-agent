@@ -1,16 +1,17 @@
 # Set default values for build arguments
-ARG DOCKERFILE_VERSION=1.2.0
+ARG DOCKERFILE_VERSION=1.0.0
 ARG JNLP_VERSION=3.27-1
 
 FROM jenkins/jnlp-slave:$JNLP_VERSION-alpine
 
-# Label images to aid searching
-LABEL jnlp.version=$JNLP_VERSION \
-      version=$DOCKERFILE_VERSION \
-      repository=johnwatson484/jnlp-slave
+USER root
+
+# Add JenkinsCI user
+# Create a dotnet user to run as
+RUN addgroup -g 1000 jenkinsci \
+    && adduser -u 1000 -G jenkinsci -s /bin/sh -D jenkinsci
 
 # Install dependencies as root
-USER root
 RUN apk update && apk add --no-cache docker curl jq make py-pip python-dev libffi-dev openssl-dev gcc libc-dev make && \
     pip install --upgrade pip && \
     pip install cffi && \
