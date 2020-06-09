@@ -1,2 +1,2 @@
-# jnlp-slave
-Jenkins slave
+# jnlp-agent
+Jenkins agent
