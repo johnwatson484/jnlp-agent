@@ -6,11 +6,6 @@ FROM jenkins/jnlp-slave:$JNLP_VERSION-alpine
 
 USER root
 
-# Add JenkinsCI user
-# Create a dotnet user to run as
-RUN addgroup -g 1000 jenkinsci \
-    && adduser -u 1000 -G jenkinsci -s /bin/sh -D jenkinsci
-
 # Install dependencies as root
 RUN apk update && apk add --no-cache docker curl jq make py-pip python-dev libffi-dev openssl-dev gcc libc-dev make && \
     pip install --upgrade pip && \
